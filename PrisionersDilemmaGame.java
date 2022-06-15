@@ -1,6 +1,6 @@
 // Prisoners Dilemma Game
 // Made by: Benji Cresswell
-// v0.1.2
+// v0.1.2.1
 // This is the primary class, the one that you need to run
 // to start the game
 
@@ -20,6 +20,7 @@ public class PrisionersDilemmaGame
     int outcomeTotal; //The amount of years in prison each side will recive in total
     int defectSubtraction = 1; //how much defecting lessins your sentance
     int defectAddition = 3; // how much defecting increases the other players
+    String numberGetter;
     /**
      * Constructor for objects of class PrisionersDilemmaGame
      */
@@ -37,26 +38,27 @@ public class PrisionersDilemmaGame
             System.out.println("settings");
             break;
             case 3:
-            System.out.println("Error: Incorrect Input dtected, please restart the program");
+            System.out.println("Error: Incorrect Input detected, restarting");
+            new PrisionersDilemmaGame();
             break;
 
         }
     }
 
-    static void introText()
+    public void introText()
     {
         System.out.println("Welcome to the Prisoners Dilemma");
         System.out.println("This is a classic game theory experiment");
         System.out.println("press 1 to go to the game and 2 to edit options");
     }
 
-    static byte location()
+    public byte location()
     {
         Scanner locationInput = new Scanner(System.in); //make scanner for input
         System.out.println("Wherego?");
-        byte desiredLocation = locationInput.nextByte(); //get where user wants to go
-        if(desiredLocation < 3 && desiredLocation > 0){
-            if(desiredLocation == 1){
+        numberGetter = locationInput.nextLine();
+        if(numberGetter.equals(1)|numberGetter.equals(2)){ //if it is a one or two
+            if(numberGetter.equals(1)){
                 return(1); // goto game
             }
             else{
