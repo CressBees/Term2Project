@@ -1,6 +1,6 @@
 // Prisoners Dilemma Game
 // Made by: Benji Cresswell
-// v0.1.2.1
+// v0.1.3
 // This is the primary class, the one that you need to run
 // to start the game
 
@@ -57,8 +57,8 @@ public class PrisionersDilemmaGame
         Scanner locationInput = new Scanner(System.in); //make scanner for input
         System.out.println("Wherego?");
         numberGetter = locationInput.nextLine();
-        if(numberGetter.equals(1)|numberGetter.equals(2)){ //if it is a one or two
-            if(numberGetter.equals(1)){
+        if(numberGetter.equals("1")|numberGetter.equals("2")){ //if it is a one or two
+            if(numberGetter.equals("1")){
                 return(1); // goto game
             }
             else{
@@ -77,15 +77,15 @@ public class PrisionersDilemmaGame
         System.out.println("You are now playing the prisoners Dillemma");
         System.out.println("You are a prisoner, you and your co-consqiritor have been caught robbing a bank");
         System.out.println("The police have given both you and your comrade a choice");
-        System.out.println("You could remain silent(cooperate) Or, you could defect(betray) and provide a testimoney to the police");
+        System.out.println("You could remain silent(cooperate) Or, you could defect and provide a testimoney to the police");
         System.out.println("If you chose to cooperate the police will give you one year in prision");
-        System.out.println("and if you betray the police will remove a year from your sentence but add three to your partners");
+        System.out.println("and if you defect the police will remove a year from your sentence but add three to your partners");
         System.out.println("the catch is that your partner is also making these choices and if you play nice, they may betray you");
         System.out.println("Your goal is to minimize the number of years you spend in prison");
         System.out.println("--------------------------------------------------------------------------------------------------------");
         System.out.println("Some notes");
-        System.out.println("at certain points when you make your choices you will be asked to input either a 1 or 0,");
-        System.out.println("DO NOT input anything other than the requested inputs or unexpected errors or even crashes may occur");
+        System.out.println("at certain points when you make your choices you will be asked to input either a 1 or 2,");
+        System.out.println("DO NOT input anything other than the requested inputs or unexpected errors may occur");
         System.out.println("have fun");
 
 
@@ -131,12 +131,13 @@ public class PrisionersDilemmaGame
     {
         Scanner keyboardInput = new Scanner(System.in); //make scanner for input
         for(int i = 0;i < 6;i++){ // for loop had a purpose but I got rid of that so it's just antiquated code I am too afraid to remove
-            System.out.println("Input a 1 for cooperate and 0 for defect");
-            byte playerInput = keyboardInput.nextByte(); //get use input
-            if(playerInput == 0){
+            System.out.println("Input a 1 for cooperate and 2 for defect");
+            
+            String playerInput = keyboardInput.nextLine(); //get use input
+            if(playerInput.equals("1")){
                 return(false);
             }
-            else if(playerInput == 1){
+            else if(playerInput.equals("2")){
                 return(true);
             }
             else{
@@ -153,13 +154,13 @@ public class PrisionersDilemmaGame
     public boolean isSecondPlayer()
     {
         Scanner keyboardInput = new Scanner(System.in); //make scanner for input
-        for(int i = 0;i < 6;i++){ // for loop is so that the player
-            System.out.println("Input a 1 if there is a second player and a 0 if there is not");
-            byte playerInput = keyboardInput.nextByte(); //get user input
-            if(playerInput == 0){
+        for(int i = 0;i < 6;i++){ // for loop is so that if the player enters an unrecognised input they can try again
+            System.out.println("Input a 1 if there is a second player and a 2 if there is not");
+            String playerInput = keyboardInput.nextLine(); //get user input
+            if(playerInput.equals("2")){
                 return(false);
             }
-            else if(playerInput == 1){
+            else if(playerInput.equals("1")){
                 return(true);
             }
             else{ //if the user does not enter a 0 or 1  it goes back to the start
@@ -199,5 +200,11 @@ public class PrisionersDilemmaGame
         System.out.println("Player 2 gets "+outcomePlayerTwo+" years in prison");
         System.out.println("in total you got a combined "+outcomeTotal+" years in prison");
     }
+
+
+
+
+//Ease of search Line break
+
 
 }
