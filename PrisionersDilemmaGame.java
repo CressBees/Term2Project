@@ -24,7 +24,7 @@ public class PrisionersDilemmaGame
     /**
      * Constructor for objects of class PrisionersDilemmaGame
      */
-    public PrisionersDilemmaGame()
+    public void main(String[] args)
     {
         // Introductions & Explainations, done of launch
         introText();
@@ -69,10 +69,9 @@ public class PrisionersDilemmaGame
             return(3); //not one or 2, try again
         }
     }
-    
+
     //Runs the Prison Game Part
     public void prisonFunc(){
-
 
         System.out.println("You are now playing the prisoners Dillemma");
         System.out.println("You are a prisoner, you and your co-consqiritor have been caught robbing a bank");
@@ -87,7 +86,6 @@ public class PrisionersDilemmaGame
         System.out.println("at certain points when you make your choices you will be asked to input either a 1 or 2,");
         System.out.println("DO NOT input anything other than the requested inputs or unexpected errors may occur");
         System.out.println("have fun");
-
 
         if(isSecondPlayer()==true)
         {
@@ -106,7 +104,7 @@ public class PrisionersDilemmaGame
                 System.out.println("you have been betrayed by the AI!");
             }
         }
-        
+
         //gets player ones choice
         if(getPlayerChoice()==true)
         {
@@ -115,7 +113,7 @@ public class PrisionersDilemmaGame
         else{
             playerOneChoice = false; // player defects
         }
-        
+
         //gets player twos results
         if(getPlayerChoice()==true){
             playerTwoChoice = true; // player2 coops
@@ -124,15 +122,16 @@ public class PrisionersDilemmaGame
             playerTwoChoice = false; //player two defects
         }
         getResults();
-        
+        playAgain();
+
     }
     //Finds out if the first player cooperates or defects
     public boolean getPlayerChoice()
     {
         Scanner keyboardInput = new Scanner(System.in); //make scanner for input
-        for(int i = 0;i < 6;i++){ // for loop had a purpose but I got rid of that so it's just antiquated code I am too afraid to remove
+        for(int i = 0;i < 6;i++){ // for loop so if player eneters bad input they can try again
             System.out.println("Input a 1 for cooperate and 2 for defect");
-            
+
             String playerInput = keyboardInput.nextLine(); //get use input
             if(playerInput.equals("1")){
                 return(false);
@@ -154,7 +153,7 @@ public class PrisionersDilemmaGame
     public boolean isSecondPlayer()
     {
         Scanner keyboardInput = new Scanner(System.in); //make scanner for input
-        for(int i = 0;i < 6;i++){ // for loop is so that if the player enters an unrecognised input they can try again
+        for(int i = 0;i < 6;i++){ // for loop is so that if the player enters an unrecognised input they can try again, it stops at six attempts
             System.out.println("Input a 1 if there is a second player and a 2 if there is not");
             String playerInput = keyboardInput.nextLine(); //get user input
             if(playerInput.equals("2")){
@@ -199,12 +198,32 @@ public class PrisionersDilemmaGame
         System.out.println("Player 1 gets "+outcomePlayerOne+" years in prison");
         System.out.println("Player 2 gets "+outcomePlayerTwo+" years in prison");
         System.out.println("in total you got a combined "+outcomeTotal+" years in prison");
+
     }
 
+    //This meth handles if you play again
+    public boolean playAgain(){
+        System.out.println("Would you like to play again?");
+        Scanner keyboardInput = new Scanner(System.in);
+        for(int i = 0;i < 6;i++){ // for loop is so that if the player enters an unrecognised input they can try again, it stops at six attempts
+            System.out.println("press 1 for yes and 2 for no");
+            String playerInput = keyboardInput.nextLine();
+            if(playerInput == ("1")){
+                keyboardInput.close();
+                return(true);
+            }
+            else if(playerInput == ("2")){
+                keyboardInput.close();
+                return(false);
+            }
+            else{
+                System.out.println("Error, Unrecognised input. Please try again");
+            }
+        }
+        System.out.println("Unknown Error, Defualting to true"); //if six attempts fail it defults to true
+        keyboardInput.close();
+        return(true);
+    }
 
-
-
-//Ease of search Line break
-
-
+    //Ease of search Line break
 }
