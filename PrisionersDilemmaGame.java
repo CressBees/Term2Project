@@ -1,6 +1,6 @@
 // Prisoners Dilemma Game
 // Made by: Benji Cresswell
-// v0.1.4
+// v0.1.3.2
 // This is the primary class, the one that you need to run
 // to start the game
 
@@ -25,7 +25,7 @@ public class PrisionersDilemmaGame {
     /**
      * Constructor for objects of class PrisionersDilemmaGame
      */
-    public void main(String[] args) {
+    public static void main(String[] args) {
         // this.PrisionersDilemmaGame();
     }
 
@@ -36,16 +36,16 @@ public class PrisionersDilemmaGame {
         // Sends the player to where they want to go
         switch (location()) {
             case 1:
-                System.out.println("you're playing the game");
-                prisonFunc();
-                break;
+            System.out.println("you're playing the game");
+            prisonFunc();
+            break;
             case 2:
-                System.out.println("settings");
-                break;
+            System.out.println("settings");
+            break;
             case 3:
-                System.out.println("Error: Incorrect Input detected, restarting");
-                new PrisionersDilemmaGame();
-                break;
+            System.out.println("Error: Incorrect Input detected, restarting");
+            new PrisionersDilemmaGame();
+            break;
 
         }
     }
@@ -78,12 +78,12 @@ public class PrisionersDilemmaGame {
         System.out.println("You are a prisoner, you and your co-consqiritor have been caught robbing a bank");
         System.out.println("The police have given both you and your comrade a choice");
         System.out.println(
-                "You could remain silent(cooperate) Or, you could defect and provide a testimoney to the police");
+            "You could remain silent(cooperate) Or, you could defect and provide a testimoney to the police");
         System.out.println("If you chose to cooperate the police will give you one year in prision");
         System.out.println(
-                "and if you defect the police will remove a year from your sentence but add three to your partners");
+            "and if you defect the police will remove a year from your sentence but add three to your partners");
         System.out.println(
-                "the catch is that your partner is also making these choices and if you play nice, they may betray you");
+            "the catch is that your partner is also making these choices and if you play nice, they may betray you");
         System.out.println("Your goal is to minimize the number of years you spend in prison");
         System.out.println("--------------------------------------------------------------------------------------------------------");
         System.out.println("Some notes");
@@ -115,10 +115,12 @@ public class PrisionersDilemmaGame {
         }
 
         // gets player twos results
-        if (getPlayerChoice() == true) {
-            playerTwoChoice = true; // player2 coops
-        } else {
-            playerTwoChoice = false; // player two defects
+        if(enableAI = false){
+            if (getPlayerChoice() == true) {
+                playerTwoChoice = true; // player2 coops
+            } else {
+                playerTwoChoice = false; // player two defects
+            }
         }
         getResults();
         playAgain();
@@ -127,21 +129,21 @@ public class PrisionersDilemmaGame {
 
     // Finds out if the first player cooperates or defects
     public boolean getPlayerChoice() {
-        try (Scanner keyboardInput = new Scanner(System.in)) {
-            for (int i = 0; i < 6; i++) { // for loop so if player eneters bad input they can try again
-                System.out.println("Input a 1 for cooperate and 2 for defect");
+        Scanner keyboardInput = new Scanner(System.in);
+        for (int i = 0; i < 6; i++) { // for loop so if player eneters bad input they can try again
+            System.out.println("Input a 1 for cooperate and 2 for defect");
 
-                String playerInput = keyboardInput.nextLine(); // get use input
-                if (playerInput.equals("1")) {
-                    return (false);
-                } else if (playerInput.equals("2")) {
-                    return (true);
-                } else {
-                    System.out.println("Error: Unrecognised input, please try again");
-                    System.out.println("outputting debug info" + i);
-                }
+            String playerInput = keyboardInput.nextLine(); // get use input
+            if (playerInput.equals("1")) {
+                return (true);
+            } else if (playerInput.equals("2")) {
+                return (false);
+            } else {
+                System.out.println("Error: Unrecognised input, please try again");
+                System.out.println("outputting debug info" + i);
             }
         }
+
         System.out.println("Error: Unrecognised Error"); // if the player enters unreadable info 6 times in row it will
         // just defualt to true
         return (true);
@@ -150,27 +152,25 @@ public class PrisionersDilemmaGame {
     // finds out if there is a second player
     // it makes a keyboard input variable and gets the input of the player
     public boolean isSecondPlayer() {
-        try (Scanner keyboardInput = new Scanner(System.in)) {
-            for (int i = 0; i < 6; i++) { // for loop is so that if the player enters an unrecognised input they can try
-                // again, it stops at six attempts
-                System.out.println("Input a 1 if there is a second player and a 2 if there is not");
-                String playerInput = keyboardInput.nextLine(); // get user input
-                if (playerInput.equals("2")) {
-
-                    return (false);
-                } else if (playerInput.equals("1")) {
-                    return (true);
-                } else { // if the user does not enter a 0 or 1 it goes back to the start
-                    System.out.println("Error: Unrecognised input, please try again");
-                    System.out.println("outputting debug info" + i);
-                }
+        Scanner keyboardInput = new Scanner(System.in);
+        for(int i = 0; i < 6; i++) { // for loop is so that if the player enters an unrecognised input they can try
+            // again, it stops at six attempts
+            System.out.println("Input a 1 if there is a second player and a 2 if there is not");
+            String playerInput = keyboardInput.nextLine(); // get user input
+            if (playerInput.equals("2")) {
+                return (false);
+            } else if (playerInput.equals("1")) {
+                return (true);
+            } else { // if the user does not enter a 0 or 1 it goes back to the start
+                System.out.println("Error: Unrecognised input, please try again");
+                System.out.println("outputting debug info" + i);
             }
         }
+
         System.out.println("Error: Unrecognised Error, returning true"); // if the player enters unreadable info 6 times
         // in row it will just defualt to true
         return (true);
     }
-
     // this meth decides whether the AI will coop or defect, for now it will just
     // decide randomly will make more advanced later
     public boolean getAIDecision() {
@@ -191,15 +191,15 @@ public class PrisionersDilemmaGame {
     public void getResults() {
         outcomePlayerOne = 1; // each player starts with one year in prison
         outcomePlayerTwo = 1;
-        if (playerOneChoice == false) {
+        if (playerOneChoice == false) { //if  p1 defects it will subract from his years and add to other
             outcomePlayerOne = outcomePlayerOne - defectSubtraction;
             outcomePlayerTwo = outcomePlayerTwo + defectAddition;
         }
-        if (playerTwoChoice == false) {
+        if (playerTwoChoice == false || enableAI == true && AIChoice == false){ //same as prev but w/ ai as well
             outcomePlayerTwo = outcomePlayerTwo - defectSubtraction;
             outcomePlayerOne = outcomePlayerOne + defectAddition;
         }
-        outcomeTotal = outcomePlayerOne + outcomePlayerTwo;
+        outcomeTotal = outcomePlayerOne + outcomePlayerTwo; // p1 yrs + p2 yrs
         System.out.println("Player 1 gets " + outcomePlayerOne + " years in prison");
         System.out.println("Player 2 gets " + outcomePlayerTwo + " years in prison");
         System.out.println("in total you got a combined " + outcomeTotal + " years in prison");
@@ -214,18 +214,18 @@ public class PrisionersDilemmaGame {
             // again, it stops at six attempts
             System.out.println("press 1 for yes and 2 for no");
             String playerInput = keyboardInput.nextLine();
-            if (playerInput == ("1")) {
-                keyboardInput.close();
+            if (playerInput.equals("1")) {
+                System.out.println("1");
                 return (true);
-            } else if (playerInput == ("2")) {
-                keyboardInput.close();
+            } else if (playerInput.equals("2")) {
+                System.out.println("2");
                 return (false);
             } else {
+                System.out.println("3");
                 System.out.println("Error, Unrecognised input. Please try again");
             }
         }
         System.out.println("Unknown Error, Defualting to true"); // if six attempts fail it defults to true
-        keyboardInput.close();
         return (true);
     }
 
