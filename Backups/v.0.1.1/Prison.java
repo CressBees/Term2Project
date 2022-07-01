@@ -9,9 +9,9 @@ public class Prison extends PrisionersDilemmaGame
 {
     // instance variables
     private int playerChoice; // players decision on if trust or betray
-    private int playerTwoChoice; // if there is anthother player, this is there choice
-    private int AIChoice; // wheather the ai will betray or trust
-    private int outcome; //The amount of years in prison each side will recive
+    private int playerTwoChoice; // if there is another player, this is there choice
+    private int AIChoice; // whether the AI will betray or trust
+    private int outcome; //The amount of years in prison each side will receive
     
     /**
      * Constructor for objects of class Prison

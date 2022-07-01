@@ -2,7 +2,7 @@
 comment0.target=PrisionersDilemmaGame
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ PrisionersDilemmaGame\r\n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ PrisonersDilemmaGame\r\n
 comment10.params=
 comment10.target=boolean\ playAgain()
 comment2.params=
