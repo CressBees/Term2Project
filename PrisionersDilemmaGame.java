@@ -7,6 +7,10 @@
 // Imports for dif parts
 import java.util.Scanner; // Look through keyboard input
 import java.util.Random; //gets random numbers
+// import java.util.Skynet; //useful for machine learning
+import java.io.File; // does stuff w/ files
+import java.io.FileWriter; //Write to files
+import java.io.IOException; //makes code not break, or at least break less
 
 public class PrisionersDilemmaGame {
     // instance variables - replace the example below with your own
@@ -21,16 +25,16 @@ public class PrisionersDilemmaGame {
     int defectSubtraction = 1; // how much defecting lessins your sentance
     int defectAddition = 3; // how much defecting increases the other players
     String numberGetter;
+    File P1TB = new File("Player1TrustsBetrays");
 
     /**
-     * Constructor for objects of class PrisonersDilemmaGame
-     */
+    * Constructor for objects of class PrisonersDilemmaGame
+    */
     public static void main(String[] args) {
         // this.PrisonersDilemmaGame();
     }
 
     public PrisionersDilemmaGame() {
-
         // Introductions & Explanations, done of launch
         introText();
         // Sends the player to where they want to go
@@ -73,7 +77,6 @@ public class PrisionersDilemmaGame {
 
     // Runs the Prison Game Part
     public void prisonFunc() {
-
         System.out.println("You are now playing the prisoners Dilemma");
         System.out.println("You are a prisoner, you and your co-consqiritor have been caught robbing a bank");
         System.out.println("The police have given both you and your comrade a choice");
@@ -125,7 +128,7 @@ public class PrisionersDilemmaGame {
                 System.out.println("2False");
             }
         }
-        
+
         getResults();
         if(playAgain()==true){
             new PrisionersDilemmaGame();
@@ -138,11 +141,13 @@ public class PrisionersDilemmaGame {
         Scanner keyboardInput = new Scanner(System.in);
         for (int i = 0; i < 6; i++) { // for loop so if player eneters bad input they can try again
             System.out.println("Input a 1 for cooperate and 2 for defect");
-            String playerInput = keyboardInput.nextLine(); // get use input
+            String playerInput = keyboardInput.nextLine(); // get user input
             if (playerInput.equals("1")) {
-                return (true); //
+                keyboardInput.close(); //closes scanner
+                return (true); // Trust
             } else if (playerInput.equals("2")) {
-                return (false); //
+                keyboardInput.close();
+                return (false); // Betray
             } else {
                 System.out.println("Error: Unrecognised input, please try again");
                 System.out.println("outputting debug info" + i);
@@ -164,10 +169,12 @@ public class PrisionersDilemmaGame {
             String playerInput = keyboardInput.nextLine(); // get user input
             if (playerInput.equals("2")) {
                 System.out.println("False");
+                keyboardInput.close(); //closes scanner
                 return (false); // there is not a second player
             } else if (playerInput.equals("1")) {
                 System.out.println("True");
-                return (true); // there is
+                keyboardInput.close();
+                return (true); // there is a second
             } else { // if the user does not enter a 0 or 1 it goes back to the start
                 System.out.println("Error: Unrecognised input, please try again");
                 System.out.println("outputting debug info" + i);
@@ -187,14 +194,17 @@ public class PrisionersDilemmaGame {
         // and 100(inclusive)
         if (randomNumber > trustCooeffciant) { // if the generated random number is larger than the trust coefficient
             // then is will trust you, but if not it will betray you
+            System.out.println("AITrust");
             return (true);
         } else {
+            System.out.println("AIBetray");
             return (false);
         }
     }
 
     // This handles the results of the game, it adds all the results of the
     // defections up, if both players coop, it does nothing
+    // at base defect subract == 3
     public void getResults() {
         outcomePlayerOne = 1; // each player starts with one year in prison
         outcomePlayerTwo = 1;
@@ -202,14 +212,35 @@ public class PrisionersDilemmaGame {
             outcomePlayerOne = outcomePlayerOne - defectSubtraction;
             outcomePlayerTwo = outcomePlayerTwo + defectAddition;
         }
-        if (playerTwoChoice == false || enableAI == true && AIChoice == false){ //same as prev but w/ AI as well
+        if (playerTwoChoice == false&&enableAI == false){ //same as prev but w/ AI as well
             outcomePlayerTwo = outcomePlayerTwo - defectSubtraction;
             outcomePlayerOne = outcomePlayerOne + defectAddition;
         }
+
         outcomeTotal = outcomePlayerOne + outcomePlayerTwo; // p1 yrs + p2 yrs
         System.out.println("Player 1 gets " + outcomePlayerOne + " years in prison");
         System.out.println("Player 2 gets " + outcomePlayerTwo + " years in prison");
         System.out.println("in total you got a combined " + outcomeTotal + " years in prison");
+        
+        //this part writes to a file containing records of p1's past moves
+        try{
+            FileWriter writer = new FileWriter("Player1TrustsBetrays.txt");
+            if(playerOneChoice == true){
+                writer.write("1,");
+                writer.close();
+            }
+            else if(playerOneChoice == false){
+                writer.write("2,");
+                writer.close();
+            }
+            else{
+                System.out.println("Error: an unreachable state has been reached, please check if reality is working");
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error: Writing Failed");
+        }
 
     }
 
@@ -223,10 +254,13 @@ public class PrisionersDilemmaGame {
             String playerInput = keyboardInput.nextLine();
             if (playerInput.equals("1")) {
                 System.out.println("1");
-                return (true);
+                keyboardInput.close(); //closes scanner
+
+                return (true); //play again
             } else if (playerInput.equals("2")) {
                 System.out.println("2");
-                return (false);
+                keyboardInput.close();
+                return (false); //don't play again
             } else {
                 System.out.println("3");
                 System.out.println("Error, Unrecognised input. Please try again");
