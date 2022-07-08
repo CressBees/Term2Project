@@ -28,8 +28,8 @@ public class PrisionersDilemmaGame {
     File P1TB = new File("Player1TrustsBetrays");
 
     /**
-    * Constructor for objects of class PrisonersDilemmaGame
-    */
+     * Constructor for objects of class PrisonersDilemmaGame
+     */
     public static void main(String[] args) {
         // this.PrisonersDilemmaGame();
     }
@@ -221,10 +221,22 @@ public class PrisionersDilemmaGame {
         System.out.println("Player 1 gets " + outcomePlayerOne + " years in prison");
         System.out.println("Player 2 gets " + outcomePlayerTwo + " years in prison");
         System.out.println("in total you got a combined " + outcomeTotal + " years in prison");
-        
+
         //this part writes to a file containing records of p1's past moves
         try{
-            FileWriter writer = new FileWriter("Player1TrustsBetrays.txt");
+            String P1TBContents = "";
+            try{
+                Scanner readTheFile = new Scanner("P1TrustsBetrays.txt");
+                while(readTheFile.hasNextLine()){
+                    System.out.println("...");
+                    P1TBContents = P1TBContents + readTheFile.nextLine();
+                }
+            }
+            catch(IOException e){
+                e.printStackTrace();
+                System.out.println("BRuh");
+            }
+            FileWriter writer = new FileWriter("Player1TrustsBetrays");
             if(playerOneChoice == true){
                 writer.write("1,");
                 writer.close();
