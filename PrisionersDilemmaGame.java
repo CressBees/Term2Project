@@ -1,8 +1,15 @@
-// Prisoners Dilemma Game
-// Made by: Benji Cresswell
-// v0.1.3.2
-// This is the primary class, the one that you need to run
-// to start the game
+/**
+ * Prisoners Dilemma Game
+ * Made by: Benji Cresswell
+ * v0.2
+ * This is the primary class, the one that you need to run
+ * to start the game
+ */
+
+//Changelog:
+//Fixed bug involving ai prison years
+//Stored past scores
+//Log of past games added
 
 // Imports for dif parts
 import java.util.Scanner; // Look through keyboard input
@@ -45,6 +52,7 @@ public class PrisionersDilemmaGame {
             break;
             case 2:
             System.out.println("settings");
+            new Settings();
             break;
             case 3:
             System.out.println("Error: Incorrect Input detected, restarting");
@@ -216,6 +224,10 @@ public class PrisionersDilemmaGame {
             outcomePlayerTwo = outcomePlayerTwo - defectSubtraction;
             outcomePlayerOne = outcomePlayerOne + defectAddition;
         }
+        if (enableAI == true&&AIChoice == false){
+            outcomePlayerTwo = outcomePlayerTwo - defectSubtraction;
+            outcomePlayerOne = outcomePlayerOne + defectAddition;
+        }
 
         outcomeTotal = outcomePlayerOne + outcomePlayerTwo; // p1 yrs + p2 yrs
         System.out.println("Player 1 gets " + outcomePlayerOne + " years in prison");
@@ -223,20 +235,9 @@ public class PrisionersDilemmaGame {
         System.out.println("in total you got a combined " + outcomeTotal + " years in prison");
 
         //this part writes to a file containing records of p1's past moves
+        //It does this by 
         try{
-            String P1TBContents = "";
-            try{
-                Scanner readTheFile = new Scanner("P1TrustsBetrays.txt");
-                while(readTheFile.hasNextLine()){
-                    System.out.println("...");
-                    P1TBContents = P1TBContents + readTheFile.nextLine();
-                }
-            }
-            catch(IOException e){
-                e.printStackTrace();
-                System.out.println("BRuh");
-            }
-            FileWriter writer = new FileWriter("Player1TrustsBetrays");
+            FileWriter writer = new FileWriter("Player1TrustsBetrays",true);
             if(playerOneChoice == true){
                 writer.write("1,");
                 writer.close();
@@ -251,7 +252,25 @@ public class PrisionersDilemmaGame {
         }
         catch (IOException e){
             e.printStackTrace();
-            System.out.println("Error: Writing Failed");
+            System.out.println("Error: Writing Failed, please check the games integrity");
+        }
+        try{
+            FileWriter writer = new FileWriter("Player2TrustsBetrays",true);
+            if(playerTwoChoice == true){
+                writer.write("1,");
+                writer.close();
+            }
+            else if(playerTwoChoice == false){
+                writer.write("2,");
+                writer.close();
+            }
+            else{
+                System.out.println("Error: an unreachable state has been reached, please check if reality is working");
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error: Writing Failed, please check the games integrity");
         }
 
     }
