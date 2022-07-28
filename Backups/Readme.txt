@@ -1,1 +1,1 @@
-This is where the previous versions are stored, no touchy
+This is antiquated, but git is spooky so I can't get rid of it

@@ -1,7 +1,8 @@
 /**
  * Prisoners Dilemma Game
  * Made by: Benji Cresswell
- * v0.2
+ * v0.3 Beta
+ * last update 28/07/2022 (d/m/y)
  * This is the primary class, the one that you need to run
  * to start the game
  */
@@ -29,10 +30,9 @@ public class PrisionersDilemmaGame {
     int outcomePlayerOne; // The amount of years in prison player 1 will recive
     int outcomePlayerTwo; // The amount of years in prison player 2/AI will recive
     int outcomeTotal; // The amount of years in prison each side will recive in total
-    int defectSubtraction = 1; // how much defecting lessins your sentance
-    int defectAddition = 3; // how much defecting increases the other players
-    String numberGetter;
-    File P1TB = new File("Player1TrustsBetrays");
+    int defectSubtraction = 1; // how much defecting lessins your sentance, def is 1
+    int defectAddition = 3; // how much defecting increases the other players, def is 3
+    String numberGetter; // gets numbers
 
     /**
      * Constructor for objects of class PrisonersDilemmaGame
@@ -66,6 +66,7 @@ public class PrisionersDilemmaGame {
         System.out.println("Welcome to the Prisoners Dilemma");
         System.out.println("This is a classic game theory experiment");
         System.out.println("press 1 to go to the game and 2 to edit options");
+        System.out.println("N.b. set up a profile in the options menu to save past results");
     }
 
     public byte location() {
@@ -286,7 +287,6 @@ public class PrisionersDilemmaGame {
             if (playerInput.equals("1")) {
                 System.out.println("1");
                 keyboardInput.close(); //closes scanner
-
                 return (true); //play again
             } else if (playerInput.equals("2")) {
                 System.out.println("2");
@@ -300,6 +300,4 @@ public class PrisionersDilemmaGame {
         System.out.println("Unknown Error, Defaulting to true"); // if six attempts fail it defaults to true
         return (true);
     }
-
-    // Ease of search Line break
 }
