@@ -1,7 +1,7 @@
 /**
  * Prisoners Dilemma Game
  * Made by: Benji Cresswell
- * v0.3 Beta
+ * v0.3.1
  * last update 28/07/2022 (d/m/y)
  * This is the primary class, the one that you need to run
  * to start the game
