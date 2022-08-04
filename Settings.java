@@ -8,7 +8,7 @@ import java.io.IOException; //makes code not break, or at least break less
  * This part handles settings
  *
  * Benji
- * 28/07/2022
+ * 4/08/2022
  */
 public class Settings extends PrisionersDilemmaGame
 {
@@ -54,11 +54,13 @@ public class Settings extends PrisionersDilemmaGame
             Scanner input = new Scanner(System.in); // make scanner for input
             numberGetter = input.nextLine();
             System.out.println("You are going to wipe all data, are you sure?");
-            System.out.println("")
+            System.out.println("");
             if(numberGetter == "1"){
                 System.out.println("debug_Success");
                 break;
-            } else
+            } else {
+                System.out.println("debug_Fail");
+            }
             case ("2"):
             break;
         }
