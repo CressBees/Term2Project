@@ -75,11 +75,14 @@ public class PrisionersDilemmaGame {
         numberGetter = locationInput.nextLine();
         if (numberGetter.equals("1") | numberGetter.equals("2")) { // if it is a one or two
             if (numberGetter.equals("1")) {
+                locationInput.close(); //close scanner to prevent it going off in other menus and save resources
                 return (1); // goto game
             } else {
+                locationInput.close();
                 return (2); // goto options
             }
         } else {
+            locationInput.close();
             return (3); // not one or 2, try again
         }
     }

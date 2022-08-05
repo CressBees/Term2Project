@@ -21,7 +21,7 @@ public class Settings extends PrisionersDilemmaGame
         String numberGetter;
 
         introText();
-        
+
         Scanner locationInput = new Scanner(System.in); // make scanner for input
         System.out.println("Where go?");
         numberGetter = locationInput.nextLine(); // number getter becomes the input
@@ -41,30 +41,46 @@ public class Settings extends PrisionersDilemmaGame
     }
 
     public void introText(){
-        System.out.println("1 to make a profile");
-        System.out.println("2 to playerTwoProfile");
+        System.out.println("1 player 1");
+        System.out.println("2 player 2");
         System.out.println("3 switch between AI modes");
     }
 
+    //This method handles the player 1 profile
+    //it does this by first asking what you want to do, then dumping you into a switch statment
+    //the switch statement then activates whatever you want to do
     public void playerOneProfile(){
         System.out.println("");
-        
-        switch(numberGetter){
-            case ("1"):
-            Scanner input = new Scanner(System.in); // make scanner for input
-            numberGetter = input.nextLine();
-            System.out.println("You are going to wipe all data, are you sure?");
-            System.out.println("");
-            if(numberGetter == "1"){
-                System.out.println("debug_Success");
+        Scanner input = new Scanner(System.in); // make scanner for input
+        numberGetter = input.nextLine();
+        try{ //needed for writer to not break
+            switch(numberGetter){
+                case ("1"): // this one wipes all the dat in the Player1TrustsBetrays file
+                FileWriter writer = new FileWriter("Player1TrustsBetrays");
+                numberGetter = input.nextLine();
+                System.out.println("You are going to wipe all data, are you sure?");
+                System.out.println("[TBD]");
+                if(numberGetter == "1"){
+                    System.out.println("debug_Success");
+                    writer.write("[TBD]");
+                    writer.close();
+                    input.close();
+                    break;
+                } else {
+                    System.out.println("debug_Fail");
+                    writer.close();
+                    input.close();
+                    break;
+                }
+                case ("2"):
+                
                 break;
-            } else {
-                System.out.println("debug_Fail");
             }
-            case ("2"):
-            break;
         }
-
+        catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error: Unexpected faliure, please check game files");
+        }
     }
 
     //
