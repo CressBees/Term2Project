@@ -8,9 +8,8 @@
  */
 
 //Changelog:
-//Fixed bug involving ai prison years
-//Stored past scores
-//Log of past games added
+//Added Settings
+//  --Settings is extremly bugged at the moment
 
 // Imports for dif parts
 import java.util.Scanner; // Look through keyboard input
@@ -51,8 +50,10 @@ public class PrisionersDilemmaGame {
             prisonFunc();
             break;
             case 2:
-            System.out.println("settings");
-            new Settings();
+            System.out.println("settings!");
+            
+            Settings Settings = new Settings();
+            System.out.println("debug_test");
             break;
             case 3:
             System.out.println("Error: Incorrect Input detected, restarting");
@@ -68,11 +69,15 @@ public class PrisionersDilemmaGame {
         System.out.println("press 1 to go to the game and 2 to edit options");
         System.out.println("N.b. set up a profile in the options menu to save past results");
     }
-
+    
+    
+    //this one gets input for location, it should be a binary method but I realised that far too late
+    // also the if elses should be a switch but bruh
     public byte location() {
         Scanner locationInput = new Scanner(System.in); // make scanner for input
         System.out.println("Where go?");
         numberGetter = locationInput.nextLine();
+        System.out.println("debug_NumberGetter");
         if (numberGetter.equals("1") | numberGetter.equals("2")) { // if it is a one or two
             if (numberGetter.equals("1")) {
                 locationInput.close(); //close scanner to prevent it going off in other menus and save resources
@@ -105,13 +110,15 @@ public class PrisionersDilemmaGame {
         System.out.println("at certain points when you make your choices you will be asked to input either a 1 or 2,");
         System.out.println("DO NOT input anything other than the requested inputs or unexpected errors may occur");
         System.out.println("have fun");
-
+        
+        
         if (isSecondPlayer() == true) {
             enableAI = false;
         } else {
             enableAI = true;
         }
-
+        
+        //there is 100% a better way to do this, Too Bad!
         if (enableAI == true) {
             if (getAIDecision() == true) {
                 AIChoice = true; // AI coops
@@ -122,7 +129,7 @@ public class PrisionersDilemmaGame {
             }
         }
 
-        // gets player ones choice
+        // gets player ones choice, this just refs anthor method, there is a better way
         if (getPlayerChoice() == true) {
             playerOneChoice = true; // player cooperates
         } else {
@@ -142,6 +149,7 @@ public class PrisionersDilemmaGame {
         }
 
         getResults();
+        
         if(playAgain()==true){
             new PrisionersDilemmaGame();
         }
@@ -151,7 +159,7 @@ public class PrisionersDilemmaGame {
     // Finds out if the first player cooperates or defects
     public boolean getPlayerChoice() {
         Scanner keyboardInput = new Scanner(System.in);
-        for (int i = 0; i < 6; i++) { // for loop so if player eneters bad input they can try again
+        for (byte i = 0; i < 6; i++) { // for loop so if player eneters bad input they can try again
             System.out.println("Input a 1 for cooperate and 2 for defect");
             String playerInput = keyboardInput.nextLine(); // get user input
             if (playerInput.equals("1")) {
@@ -175,11 +183,11 @@ public class PrisionersDilemmaGame {
     // it makes a keyboard input variable and gets the input of the player
     public boolean isSecondPlayer() {
         Scanner keyboardInput = new Scanner(System.in);
-        for(int i = 0; i < 6; i++) { // for loop is so that if the player enters an unrecognised input they can try
+        for(byte i = 0; i < 6; i++) { // for loop is so that if the player enters an unrecognised input they can try
             // again, it stops at six attempts
             System.out.println("Input a 1 if there is a second player and a 2 if there is not");
             String playerInput = keyboardInput.nextLine(); // get user input
-            if (playerInput.equals("2")) {
+            /*if (playerInput.equals("2")) {
                 System.out.println("False");
                 keyboardInput.close(); //closes scanner
                 return (false); // there is not a second player
@@ -190,7 +198,20 @@ public class PrisionersDilemmaGame {
             } else { // if the user does not enter a 0 or 1 it goes back to the start
                 System.out.println("Error: Unrecognised input, please try again");
                 System.out.println("outputting debug info" + i);
+            }*/
+            switch(playerInput){
+                case "1":
+                System.out.println("True");
+                keyboardInput.close();
+                return (true); // there is a second player
+                case "2":
+                System.out.println("False");
+                keyboardInput.close(); //closes scanner
+                return (false); // there is not a second player
+                default:
+                System.out.println("Error: Unrecognised input, please try again");
             }
+            
         }
 
         System.out.println("Error: Unrecognised Error, returning true"); // if the player enters unreadable info 6 times

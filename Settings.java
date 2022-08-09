@@ -10,17 +10,19 @@ import java.io.IOException; //makes code not break, or at least break less
  * Benji
  * 4/08/2022
  */
-public class Settings extends PrisionersDilemmaGame
+public class Settings
 {
     // instance variables - replace the example below with your own
     /**
      * Constructor for objects of class Settings
      */
+    String numberGetter;
     public Settings()
     {
-        String numberGetter;
+        System.out.println("Debug_SettingsTestBeforeNumberGetter");
+        
 
-        introText();
+        introTextSettings();
 
         Scanner locationInput = new Scanner(System.in); // make scanner for input
         System.out.println("Where go?");
@@ -40,7 +42,7 @@ public class Settings extends PrisionersDilemmaGame
         }
     }
 
-    public void introText(){
+    public void introTextSettings(){
         System.out.println("1 player 1");
         System.out.println("2 player 2");
         System.out.println("3 switch between AI modes");
