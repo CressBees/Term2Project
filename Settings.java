@@ -12,18 +12,18 @@ import java.io.IOException; //makes code not break, or at least break less
  */
 public class Settings
 {
-    // instance variables - replace the example below with your own
     /**
      * Constructor for objects of class Settings
      */
+    PrisionersDilemmaGame currentGame;
     String numberGetter;
-    public Settings()
+    public Settings(PrisionersDilemmaGame game)
     {
+
+        currentGame = game;
         System.out.println("Debug_SettingsTestBeforeNumberGetter");
-        
 
         introTextSettings();
-
         Scanner locationInput = new Scanner(System.in); // make scanner for input
         System.out.println("Where go?");
         numberGetter = locationInput.nextLine(); // number getter becomes the input
@@ -39,6 +39,9 @@ public class Settings
             break;
             default:
             System.out.println("Error, unrecognised input");
+            while(true){
+                System.out.println("You've been Gnomed!");
+            }
         }
     }
 
@@ -52,30 +55,42 @@ public class Settings
     //it does this by first asking what you want to do, then dumping you into a switch statment
     //the switch statement then activates whatever you want to do
     public void playerOneProfile(){
-        System.out.println("");
-        Scanner input = new Scanner(System.in); // make scanner for input
-        numberGetter = input.nextLine();
+        System.out.println("1 for clear all data, 2 for fabricating, three for checking");
         try{ //needed for writer to not break
-            switch(numberGetter){
-                case ("1"): // this one wipes all the dat in the Player1TrustsBetrays file
-                FileWriter writer = new FileWriter("Player1TrustsBetrays");
-                numberGetter = input.nextLine();
+            FileWriter writer = new FileWriter("Player1TrustsBetrays",true);
+            switch(currentGame.inputOutput()){
+                case (1): // this one wipes all the dat in the Player1TrustsBetrays file
                 System.out.println("You are going to wipe all data, are you sure?");
                 System.out.println("[TBD]");
-                if(numberGetter == "1"){
+                if(currentGame.inputOutput() == 1){
                     System.out.println("debug_Success");
-                    writer.write("[TBD]");
+                    writer.write("");
                     writer.close();
-                    input.close();
                     break;
                 } else {
                     System.out.println("debug_Fail");
                     writer.close();
-                    input.close();
                     break;
                 }
-                case ("2"):
-                
+                //--------------------------------------------------------------------------\\
+                case (2):
+                System.out.println("This will add extra trusts/betrays or years in prison to your record");
+                Scanner input = new Scanner(System.in); //get other input
+                String stringInput;
+                switch(currentGame.inputOutput()){
+                    case 1:
+                    System.out.println("how many trusts?");
+                    stringInput = input.nextLine();
+                    int number = Integer.parseInt(stringInput);
+                    for(int i = 0; i >= number; i++){
+                        writer.write("1, ");
+                    }
+                    break;
+                    
+                }
+                //---------------------------------------------------------------------------\\
+                case 3:
+                System.out.println("TBD");
                 break;
             }
         }
@@ -91,6 +106,13 @@ public class Settings
     }
     //
     public void AIOptions(){
+        System.out.println("[TBD]");
+        switch(currentGame.inputOutput()){
+            case 1:
 
+            case 2:
+
+            case 3:
+        }
     }
 }
