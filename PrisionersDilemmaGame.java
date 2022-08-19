@@ -1,8 +1,8 @@
 /**
  * Prisoners Dilemma Game
  * Made by: Benji Cresswell
- * v0.4
- * last update 12/08/2022 (d/m/y)
+ * v0.5
+ * last update 19/08/2022 (d/m/y)
  * This is the primary class, the one that you need to run
  * to start the game
  */
@@ -15,13 +15,15 @@
 import java.util.Scanner; // Look through keyboard input
 import java.util.Random; //gets random numbers
 // import java.util.Skynet; //useful for machine learning
+
 import java.io.File; // does stuff w/ files
 import java.io.FileWriter; //Write to files
 import java.io.IOException; //makes code not break, or at least break less
 
 public class PrisionersDilemmaGame {
     // instance variables - replace the example below with your own
-
+    int trustCooeffciant = 50; // this is how trustworthy the AI thinks the player is
+    // AI.becomeSkynetCost = 9999999999999;
     /**
      * Constructor for objects of class PrisonersDilemmaGame
      */

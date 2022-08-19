@@ -112,14 +112,9 @@ public class Game
     // this meth decides whether the AI will coop or defect, for now it will just
     // decide randomly will make more advanced later
     public boolean getAIDecision() {
-        int trustCooeffciant = 50; // this is how trustworthy the AI thinks the player is, I will make this more
-        // advanced later
-        
-        
-        
         int randomNumber = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1); // generates a random number between 1
         // and 100(inclusive)
-        if (randomNumber > trustCooeffciant) { // if the generated random number is larger than the trust coefficient
+        if (randomNumber > currentGame.trustCooeffciant) { // if the generated random number is larger than the trust coefficient
             // then is will trust you, but if not it will betray you
             System.out.println("AITrust");
             return (true);
@@ -154,7 +149,7 @@ public class Game
         System.out.println("in total you got a combined " + outcomeTotal + " years in prison");
 
         //this part writes to a file containing records of p1's past moves
-        //It does this by 
+        //It does this by looking at the choices each player made
         try{
             FileWriter writer = new FileWriter("Player1TrustsBetrays",true);
             if(playerOneChoice == true){
